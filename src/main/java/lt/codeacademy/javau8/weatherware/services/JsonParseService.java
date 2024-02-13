@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
-public class JsonParser {
-    private static final Logger LOGGER = LoggerFactory.getLogger(JsonParser.class);
+public class JsonParseService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JsonParseService.class);
     public static Optional<RootForecasts> parseJson(String json) {
         ObjectMapper om = new ObjectMapper();
+        LOGGER.info("Parsing Data in JsonParser");
         try {
             return Optional.ofNullable(om.readValue(json, RootForecasts.class));
         } catch (JsonProcessingException e) {
