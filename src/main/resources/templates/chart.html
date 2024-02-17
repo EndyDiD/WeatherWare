@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <title>Hourly Chart</title>
+</head>
+
+
+<body>
+
+<div style="display: flex; justify-content: center; align-items: center;">
+    <h1>iT WROKS SOMEWHAT</h1>
+
+
+    <div class="container">
+
+        <canvas id="myChart" width="1600vw" height="900vh"></canvas>
+
+
+        </p>
+    </div>
+
+</div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    /*<![CDATA[*/
+    var forecastData = /*[[${forecasts.ForecastTimestamps}]]*/ 'default';
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var timeStampsDataUTC = [];
+    var airTempData = []; // Replace with your data
+
+    // Assuming forecastData is an array of objects
+    // and each object has 'forecastTimeUtc' and 'temperature' properties
+    for (var i = 0; i < forecastData.length; i++) {
+        timeStampsDataUTC.push(forecastData[i].forecastTimeUtc);
+        airTempData.push(forecastData[i].temperature);
+
+        console.log(timeStampsDataUTC+','+airTempData+'\n');
+    }
+
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: timeStampsDataUTC,
+            datasets: [{
+                label: 'Temperature',
+                data: airTempData,
+                backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }, {
+                data: [-80, 60],
+                backgroundColor: 'rgba(255, 99, 132, 0)',
+                borderColor: 'rgba(255, 99, 132, 0)',
+                options: {}
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    position: 'right',
+                    beginAtZero: false,
+                    ticks: {
+                        min: -80,  // minimum value
+                        max: 60    // maximum value
+                    }
+                }
+            }
+        }
+    });
+    /*]]>*/
+</script>
+
+</html>

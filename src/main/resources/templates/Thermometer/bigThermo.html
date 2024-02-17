@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="ThermoStyle.css">
+    <link rel="stylesheet" href="ThermometerUnitConversion/UnitSwitch.css">
+</head>
+
+<style>
+    .ThermoContainer {
+        position: relative;
+        width: 29.5px;
+        height: 94%;
+    }
+
+    .thermometer {
+        z-index: 1;
+        bottom: 0;
+    }
+
+    #curTemp {
+        position: absolute;
+        bottom: 49%; /*every 0.0141 degrese C is 1 10_000th of the height*/
+        z-index: 2;
+        width: 120px;
+    }
+
+    .thermometer:before {
+        height: 50%;
+    }
+</style>
+
+
+<body>
+
+    <div style="display: flex; justify-content: center; align-items: center;">
+
+        <label class="CelciustoFarenhiteSwitch">
+            <input type="checkbox" id="convert" onclick="convertTemperature()">
+            <span class="slider round">
+                <span class="TempUnits">&nbsp;℉&nbsp;&nbsp;&nbsp;&nbsp;℃</span>
+            </span>
+        </label>
+
+
+
+        <div class="container">
+
+            <div class="temperature">
+
+                <div style="top: 0;">
+                    <span class="temp">
+                        ― 60
+                    </span>
+                    <span class="unit">
+                        ℃ ―
+                    </span>
+                </div>
+
+
+
+                <div style="bottom: 0;">
+                    <span class="temp">
+                        ― -80
+                    </span>
+                    <span class="unit">
+                        ℃ ―
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="ThermoContainer" onload="adjustHeight()">
+                <div id="curTemp">
+                    <span class="temp">
+                        ― -101
+                    </span>
+                    <span class="unit">
+                        ℃ ―
+                    </span>
+                </div>
+                <div class="thermometer"></div>
+            </div>
+            <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="ThermometerUnitConversion/UnitConverter.js"></script>
+
+</html>

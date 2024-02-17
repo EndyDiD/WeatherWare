@@ -1,4 +1,4 @@
-package lt.codeacademy.javau8.weatherware.services.MeteoApi;
+package lt.codeacademy.javau8.weatherware.services.WeatherApi;
 
 import lt.codeacademy.javau8.weatherware.entities.MeteoApi.RootForecasts;
 import lt.codeacademy.javau8.weatherware.services.JsonParseService;
