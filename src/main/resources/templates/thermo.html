@@ -2,27 +2,14 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="ThermoStyle.css">
     <link rel="stylesheet" href="ThermometerUnitConversion/UnitSwitch.css">
 </head>
-
 <style>
-    .ThermoContainer {
-        position: relative;
-        width: 29.5px;
-        height: 94%;
-    }
-
     .thermometer {
         z-index: 1;
         bottom: 0;
-    }
-
-    #curTemp {
-        position: absolute;
-        bottom: 49%; /*every 0.0141 degrese C is 1 10_000th of the height [[${temperaturePercentage}]] */
-        z-index: 2;
-        width: 120px;
     }
 
     .thermometer:before {
@@ -30,64 +17,90 @@
     }
 </style>
 
-
 <body>
-
-    <div style="display: flex; justify-content: center; align-items: center;">
-
+    <h1 style="text-align:center;">Thermometer</h1>
+    <div style="display:flex; justify-content:center; align-items:center;">
         <label class="CelciustoFarenhiteSwitch">
             <input type="checkbox" id="convert" onclick="convertTemperature()">
             <span class="slider round">
-                <span class="TempUnits">&nbsp;℉&nbsp;&nbsp;&nbsp;&nbsp;℃</span>
+                <span class="TempUnits"> ℉    ℃</span>
             </span>
         </label>
-
-
-
         <div class="container">
-
-            <div class="temperature">
-
-                <div style="top: 0;">
-                    <span class="temp">
-                        ― 60
-                    </span>
-                    <span class="unit">
-                        ℃ ―
-                    </span>
-                </div>
-
-
-
-                <div style="bottom: 0;">
-                    <span class="temp">
-                        ― -80
-                    </span>
-                    <span class="unit">
-                        ℃ ―
-                    </span>
-                </div>
-
+            <table>
+                <thead>
+                    <th>temp</th>
+                    <th>image</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="temp">-101</span>
+                            <span class="unit">℃</span>
+                        </td>
+                        <td>🧥</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="temp">-101</span>
+                            <span class="unit">℃</span>
+                        </td>
+                        <td>🧥</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="temp">-101</span>
+                            <span class="unit">℃</span>
+                        </td>
+                        <td>🧥</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="temp">-101</span>
+                            <span class="unit">℃</span>
+                        </td>
+                        <td>🧥</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="temp">-101</span>
+                            <span class="unit">℃</span>
+                        </td>
+                        <td>🧥</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="temp">-101</span>
+                            <span class="unit">℃</span>
+                        </td>
+                        <td>🧥</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span class="temp">-101</span>
+                            <span class="unit">℃</span>
+                        </td>
+                        <td>🧥</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="thermometer">
+                <div id="fill"></div>
+                <div id="temperature"><span class="temp">50</span>°</div>
             </div>
-
-            <div class="ThermoContainer" onload="adjustHeight()">
-                <div id="curTemp">
-                    <span class="temp">
-                        ― -101
-                    </span>
-                    <span class="unit">
-                        ℃ ―
-                    </span>
-                </div>
-                <div class="thermometer"></div>
-            </div>
-            <canvas id="myChart" width="400" height="400"></canvas>
         </div>
-
     </div>
-
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript" src="ThermometerUnitConversion/UnitConverter.js"></script>
+<script>
+    window.onload = function () {
+        var tableBodyHeight = document.querySelector('table tbody').offsetHeight;
+        var thermometerDiv = document.querySelector('#thermometer');
+        var containerDiv = document.querySelector('.container');
+        thermometerDiv.style.height = tableBodyHeight + 'px';
+        containerDiv.style.height = tableBodyHeight + 'px';
+    }
+</script>
 
 </html>

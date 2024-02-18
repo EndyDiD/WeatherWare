@@ -51,7 +51,7 @@ public class ApiController {
         return "Hello World!";
     }
 
-    @GetMapping("/chart")
+    @GetMapping("/thermo")
     public String getWeatherVilnius(Model model) {
         String apiMeteoURL = "https://api.meteo.lt/v1/places/vilnius/forecasts/long-term";
         try {
@@ -88,7 +88,7 @@ public class ApiController {
         } catch (Exception e) {
             LOGGER.error("Failed to get data from Meteo", e);
         }
-        return "chart"; // Return the view name
+        return "thermo"; // Return the view name
     }
 
 

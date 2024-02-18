@@ -3,54 +3,44 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-}
-
-.thermometer {
-    width: 50px;
-    height: 101.1%;
-    background-color: #ddd;
+  }
+  
+  #thermometer {
+    width: 30px;
+    height: 200px;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 10px;
     position: relative;
-    border-radius: 25px;
     overflow: hidden;
-    margin: 0 0 0 93%;
-}
-
-.thermometer:before {
-    /*fill*/
-    content: "";
+    margin-top: 23px;
+  }
+  
+  #fill {
     position: absolute;
     bottom: 0;
-    background-color: #db1d1d;
     width: 100%;
-    height: 50%;
-    /* You can change this value to represent the current temperature */
-    transition: height 0.5s linear;
-}
-
-.thermometer:after {
-    /*little thing at the bottom [useless]*/
-    content: "";
+    background: #f00;
+    animation: fill 2s ease-out forwards;
+  }
+  
+  #temperature {
     position: absolute;
-    bottom: -25px;
-    left: 15px;
-    background-color: #dddddd;
-    width: 20px;
-    height: 50px;
-    border-radius: 50%;
-}
-
-.temperature {
-    /*farenhight relative to Celcius*/
-    position: relative;
+    bottom: 0;
+    width: 100%;
     text-align: center;
-    width: 100px;
-    height: 96%;
-    margin: 0 -36px 0 58px;
-}
-
-.temperature div {
-    /*position of both relative to thermometer*/
-    position: absolute;
-    right: 0px;
-    width: 160%;
+    animation: move 2s ease-out forwards;
+  }
+  
+  @keyframes fill {
+    0% { height: 0; }
+    100% { height: 50%; }
+  }
+  
+  @keyframes move {
+    0% { bottom: 0; }
+    100% { bottom: 50%; }
+  }
+td {
+    text-align: center;
 }
