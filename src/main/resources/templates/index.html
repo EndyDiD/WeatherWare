@@ -6,16 +6,6 @@
     <link rel="stylesheet" type="text/css" href="resources/ThermoStyle.css">
     <link rel="stylesheet" type="text/css" href="resources/ThermometerUnitConversion/UnitSwitch.css">
 </head>
-<style>
-    .thermometer {
-        z-index: 1;
-        bottom: 0;
-    }
-
-    .thermometer:before {
-        height: 50%;
-    }
-</style>
 
 <body>
 <h1 style="text-align:center;">Temperature Range</h1>
@@ -51,30 +41,124 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript" src="resources/ThermometerUnitConversion/UnitConverter.js"></script>
-<script>
+<script th:inline="javascript">
     window.onload = function () {
-        var tableBodyHeight = document.querySelector('table tbody').offsetHeight;
-        var thermometerDiv = document.querySelector('#thermometer');
-        var containerDiv = document.querySelector('.container');
+        //sets the height of the Thermometer to be the same as the height of the tbody
+        // Get the tbody container's height
+        let tableBodyHeight = document.querySelector('table tbody').offsetHeight;
+        // Get the div with thermometer ID
+        let thermometerDiv = document.querySelector('#thermometer');
+        // Get the div with container class
+        let containerDiv = document.querySelector('.container');
+        // Set with thermometer div height to tbody height
         thermometerDiv.style.height = tableBodyHeight + 'px';
+        // Set with container div height to tbody height
         containerDiv.style.height = tableBodyHeight + 'px';
 
+        // Sets the position of the scroll wheel in the container
         // Get the tbody container
-        var tbody = document.querySelector('table tbody');
-
+        let tbody = document.querySelector('table tbody');
         // Calculate the maximum scroll position (total height - visible height)
-        var maxScrollTop = tbody.scrollHeight - tbody.clientHeight;
-
-        // Set the desired scroll percentage (e.g., 50%)
-        var scrollPercentage = 50;
-
+        let maxScrollTop = tbody.scrollHeight - tbody.clientHeight;
         // Calculate the pixel value for the desired scroll percentage
-        var scrollTopValue = (maxScrollTop * scrollPercentage) / 100;
+        let scrollTopValue = (maxScrollTop * percentageOfTempValue()) / 100;
+        // Calculate the reversed scroll position
+        let reversedScrollTopValue = maxScrollTop - scrollTopValue;
+        // Set the reversed scroll position
+        tbody.scrollTop = reversedScrollTopValue;
+        animateScroll(tbody, maxScrollTop, reversedScrollTopValue, 2000); // 2000ms = 2s
 
-        // Set the scroll position
-        tbody.scrollTop = scrollTopValue;
 
+        // Calculate the bottom value (replace this with your function)
+        let bottomValue = percentageOfTempValue();
+        // Create a new style rule
+        let styleRuleFill = `@keyframes fill {
+            0% {
+                height: 0;
+            }
+            100% {
+                height: ${bottomValue}%;
+            }
+        }`;
+        // Create a 2nd style rule
+        let styleRuleMove = `@keyframes move {
+            0% {
+                bottom: 0;
+            }
+            100% {
+                bottom: ${bottomValue}%;
+            }
+        }`;
+        // Get the first stylesheet
+        let stylesheet = document.styleSheets[0];
+        // Insert the new style rules into the stylesheet
+        stylesheet.insertRule(styleRuleFill, stylesheet.cssRules.length);
+        stylesheet.insertRule(styleRuleMove, stylesheet.cssRules.length);
+
+        // Highlight Row With Specific TempValue
+        // Get all the tr elements in the tbody
+        let trElements = document.querySelectorAll('table tbody tr');
+        // Initialize specificValue to a thymeleaf value
+        /*<![CDATA[*/
+        let specificValue = /*[[${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}]]*/ 'default';
+        /*]]>*/
+        // Iterate over each tr element
+        trElements.forEach((tr) => {
+            // Get the temperature value from the first td in the tr
+            let tempValue = parseFloat(tr.children[0].textContent);
+
+            // If the temperature value matches the specific value, add a highlight class
+            if (tempValue === Math.floor(specificValue)) {
+                tr.classList.add('highlight');
+            }
+        });
     }
+
+    function percentageOfTempValue() {
+        // calculates the correct percentage for the tempValue
+        // Get all the tr elements in the tbody
+        let trElements = document.querySelectorAll('table tbody tr');
+
+        // Count the number of tr elements and assign it to Y
+        let Y = trElements.length;
+
+        // Initialize X to a thymeleaf value
+        /*<![CDATA[*/
+        let X = /*[[${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}]]*/ 'default';
+        /*]]>*/
+
+        // Iterate over each tr element
+        trElements.forEach((tr) => {
+            // Get the temperature value from the first td in the tr
+            let tempValue = parseFloat(tr.children[0].textContent);
+
+            // If the temperature value is less than 0, increment X
+            if (tempValue < 0) {
+                X++;
+            }
+        });
+
+        // Calculate the result as (X/Y) * 100 and then round up
+        return result = Math.floor((X / Y) * 100);
+    }
+
+    // Function to animate the scrollbar
+    function animateScroll(element, from, to, duration) {
+        let start = null;
+
+        function step(timestamp) {
+            if (!start) start = timestamp;
+            let progress = timestamp - start;
+            let current = from + (to - from) * progress / duration;
+            element.scrollTop = current;
+            if (progress < duration) {
+                window.requestAnimationFrame(step);
+            }
+        }
+
+        window.requestAnimationFrame(step);
+    }
+
 </script>
 
 </html>

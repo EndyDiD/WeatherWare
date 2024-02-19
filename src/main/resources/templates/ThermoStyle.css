@@ -1,3 +1,6 @@
+body{
+    font-family: Calibre,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 .container {
     display: flex;
     justify-content: center;
@@ -59,9 +62,24 @@ table tbody {
     max-height: 70vh; /* Set max-height to 70% of the viewport height */
     overflow-y: auto; /* Add scroll if content is larger than max-height */
     width: 280px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
 }
 table thead, table tbody tr {
     display: table; /* Enable table properties for thead and tbody */
     width: 250px;
     table-layout: fixed; /* Fixed columns width */
+}
+@keyframes blink {
+    0% {background-color: lightsalmon;}
+    25% {background-color: transparent;}
+    50% {background-color: lightsalmon;}
+    75% {background-color: transparent;}
+    100% {background-color: lightsalmon;}
+}
+.highlight {
+    background-color: lightsalmon; /* Change this to your preferred highlight color */
+    animation: blink 3s linear 1;
+    border-collapse: separate;
+    border-radius: 10px;
 }
