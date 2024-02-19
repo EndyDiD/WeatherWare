@@ -62,7 +62,7 @@ public class ApiController {
                     .sorted(Comparator.comparingInt(ClothingItem::getTempValue).reversed())
                     .collect(Collectors.toList());
             model.addAttribute("clothingItems", sortedItems);
-            LOGGER.warn(clothingItemRepository.findAll().toString());
+            LOGGER.debug(clothingItemRepository.findAll().toString());
         } catch (Exception e) {
             LOGGER.error("Failed to get data from clothing Item Repository", e);
         }

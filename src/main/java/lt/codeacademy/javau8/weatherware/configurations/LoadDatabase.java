@@ -98,6 +98,7 @@ public class LoadDatabase {
                 repository.save(new ClothingItem(-27, "🧤🧣🧥👖🥾"));
                 repository.save(new ClothingItem(-28, "🧤🧣🧥👖🥾"));
                 repository.save(new ClothingItem(-29, "🧤🧣🧥👖🥾"));
+                repository.save(new ClothingItem(-30, "🥶"));
                 repository.save(new ClothingItem(-31, "🥶"));
                 repository.save(new ClothingItem(-32, "🥶"));
                 repository.save(new ClothingItem(-33, "🥶"));
