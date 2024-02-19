@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<h1 style="text-align:center;">Temperature Range</h1>
+<h1 style="text-align:center;">Real Feel Temperature Range</h1>
 <div style="display:flex; justify-content:center; align-items:center;">
     <label class="CelciustoFarenhiteSwitch">
         <input type="checkbox" id="convert" onclick="convertTemperature()">
@@ -20,7 +20,7 @@
         <table>
             <thead>
             <th>Temperature</th>
-            <th>Emoji</th>
+            <th>Clothing</th>
             </thead>
             <tbody>
             <tr th:each="item : ${clothingItems}">
@@ -40,7 +40,7 @@
         </table>
         <div id="thermometer">
             <div id="fill"></div>
-            <div id="temperature"><span id="currentTemp" class="temp" th:text="${forecasts.forecastTimestamps.get(3).getFeelsLikeTemperature()}">[curTemp]</span>°</div>
+            <div id="temperature"><span id="currentTemp" class="temp" th:text="${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}">[curTemp]</span>°</div>
         </div>
     </div>
 </div>
@@ -105,7 +105,7 @@
         let trElements = document.querySelectorAll('table tbody tr');
         // Initialize specificValue to a thymeleaf value
         /*<![CDATA[*/
-        let specificValue = /*[[${forecasts.forecastTimestamps.get(3).getFeelsLikeTemperature()}]]*/ '50';
+        let specificValue = /*[[${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}]]*/ '50';
         /*]]>*/
         // Iterate over each tr element
         trElements.forEach((tr) => {
@@ -122,11 +122,11 @@
     function percentageOfTempValue() {
         // calculates the correct percentage for the tempValue
         /*<![CDATA[*/
-        let X = /*[[${forecasts.forecastTimestamps.get(3).getFeelsLikeTemperature()}]]*/ '50';
+        let X = /*[[${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}]]*/ '50';
         /*]]>*/
         // If the temperature value is less than 0, increment X
-        if (X < 0) {
-            X+=40;
+        if (X <= 0) {
+            X+=41;
         }
 
         // Calculate the result as (X/Y) * 100 and then round up
