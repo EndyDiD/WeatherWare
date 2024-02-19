@@ -2,7 +2,7 @@ package lt.codeacademy.javau8.weatherware.configurations;
 
 import lt.codeacademy.javau8.weatherware.controllers.ClothingItemController;
 import lt.codeacademy.javau8.weatherware.entities.ClothingItem;
-import lt.codeacademy.javau8.weatherware.repositories.ClothingItemRepository;
+import lt.codeacademy.javau8.weatherware.repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

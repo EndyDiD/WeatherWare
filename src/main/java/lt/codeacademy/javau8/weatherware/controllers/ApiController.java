@@ -1,5 +1,6 @@
 package lt.codeacademy.javau8.weatherware.controllers;
 
+import jakarta.annotation.PreDestroy;
 import lt.codeacademy.javau8.weatherware.entities.ClothingItem;
 import lt.codeacademy.javau8.weatherware.entities.MeteoApi.Coordinates;
 import lt.codeacademy.javau8.weatherware.entities.MeteoApi.Place;

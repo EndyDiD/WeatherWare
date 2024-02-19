@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Update Single Item</h1>
+<form action="#" th:action="@{/updateSingle}" method="post">
+    <label for="tempValue">Temperature:</label><br>
+    <input type="number" id="tempValue" name="tempValue" required><br>
+    <label for="clothingItemEmoji">Emoji:</label><br>
+    <input type="text" id="clothingItemEmoji" name="clothingItemEmoji" required><br>
+    <input type="submit" value="Update">
+</form>
+
+<h1>Update Multiple Items</h1>
+<form action="#" th:action="@{/updateMultiple}" method="post">
+    <label for="tempValues">Temperatures (comma-separated):</label><br>
+    <textarea id="tempValues" name="tempValues" required></textarea><br>
+    <label for="clothingItemEmoji">Emoji:</label><br>
+    <input type="text" id="clothingItemEmojiMultiple" name="clothingItemEmoji" required><br>
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>

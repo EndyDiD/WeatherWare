@@ -32,14 +32,19 @@
             </tr>
             </tbody>
         </table>
+        <table style="display: none">
+            <tr th:each="entry : ${forecasts.forecastTimestamps}">
+                <td th:text="${entry.getForecastTimeUtc()}">[time]</td>
+                <td th:text="${entry.getFeelsLikeTemperature()}">[temp]</td>
+            </tr>
+        </table>
         <div id="thermometer">
             <div id="fill"></div>
-            <div id="temperature"><span class="temp" th:text="${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}">[currentTemperature]</span>°</div>
+            <div id="temperature"><span id="currentTemp" class="temp" th:text="${forecasts.forecastTimestamps.get(3).getFeelsLikeTemperature()}">[curTemp]</span>°</div>
         </div>
     </div>
 </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript" src="resources/ThermometerUnitConversion/UnitConverter.js"></script>
 <script th:inline="javascript">
     window.onload = function () {
@@ -100,7 +105,7 @@
         let trElements = document.querySelectorAll('table tbody tr');
         // Initialize specificValue to a thymeleaf value
         /*<![CDATA[*/
-        let specificValue = /*[[${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}]]*/ 'default';
+        let specificValue = /*[[${forecasts.forecastTimestamps.get(3).getFeelsLikeTemperature()}]]*/ '50';
         /*]]>*/
         // Iterate over each tr element
         trElements.forEach((tr) => {
@@ -116,30 +121,16 @@
 
     function percentageOfTempValue() {
         // calculates the correct percentage for the tempValue
-        // Get all the tr elements in the tbody
-        let trElements = document.querySelectorAll('table tbody tr');
-
-        // Count the number of tr elements and assign it to Y
-        let Y = trElements.length;
-
-        // Initialize X to a thymeleaf value
         /*<![CDATA[*/
-        let X = /*[[${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}]]*/ 'default';
+        let X = /*[[${forecasts.forecastTimestamps.get(3).getFeelsLikeTemperature()}]]*/ '50';
         /*]]>*/
-
-        // Iterate over each tr element
-        trElements.forEach((tr) => {
-            // Get the temperature value from the first td in the tr
-            let tempValue = parseFloat(tr.children[0].textContent);
-
-            // If the temperature value is less than 0, increment X
-            if (tempValue < 0) {
-                X++;
-            }
-        });
+        // If the temperature value is less than 0, increment X
+        if (X < 0) {
+            X+=40;
+        }
 
         // Calculate the result as (X/Y) * 100 and then round up
-        return result = Math.floor((X / Y) * 100);
+        return Math.floor((X / 90) * 100);
     }
 
     // Function to animate the scrollbar

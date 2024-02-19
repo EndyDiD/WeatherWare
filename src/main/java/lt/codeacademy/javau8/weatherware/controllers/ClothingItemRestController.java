@@ -3,18 +3,20 @@ package lt.codeacademy.javau8.weatherware.controllers;
 import lt.codeacademy.javau8.weatherware.entities.DTOs.ClothingItems.UpdateMultipleRequest;
 import lt.codeacademy.javau8.weatherware.entities.DTOs.ClothingItems.UpdateRequest;
 import lt.codeacademy.javau8.weatherware.repositories.ClothingItemRepository;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/index/clothingItems")
+@RequestMapping("/index")
 public class ClothingItemRestController {
     private final ClothingItemRepository repository;
 
     ClothingItemRestController(ClothingItemRepository repository) {
         this.repository = repository;
+    }
+
+    @GetMapping("/edit")
+    public String showUpdateForm(){
+        return "update-form";
     }
 
     @PostMapping("/updateSingle")
