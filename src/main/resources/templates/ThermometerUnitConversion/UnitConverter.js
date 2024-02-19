@@ -11,7 +11,7 @@ function convertTemperature() {
 
     if (document.getElementById("convert").checked) {
       // Convert from Celsius to Fahrenheit
-      temperatureElements[i].textContent = (celsiusTemperatures[i] * 9 / 5) + 32;
+      temperatureElements[i].textContent = parseInt((celsiusTemperatures[i] * 9 / 5) + 32).toFixed(0);
 
       unitElements[i].textContent = "℉";
     } else {

@@ -3,10 +3,10 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-  }
-  
-  #thermometer {
-    width: 30px;
+}
+
+#thermometer {
+    width: 47px;
     height: 200px;
     background: #fff;
     border: 2px solid #000;
@@ -14,33 +14,54 @@
     position: relative;
     overflow: hidden;
     margin-top: 23px;
-  }
-  
-  #fill {
+}
+
+#fill {
     position: absolute;
     bottom: 0;
     width: 100%;
     background: #f00;
     animation: fill 2s ease-out forwards;
-  }
-  
-  #temperature {
+}
+
+#temperature {
     position: absolute;
     bottom: 0;
     width: 100%;
     text-align: center;
     animation: move 2s ease-out forwards;
-  }
-  
-  @keyframes fill {
-    0% { height: 0; }
-    100% { height: 50%; }
-  }
-  
-  @keyframes move {
-    0% { bottom: 0; }
-    100% { bottom: 50%; }
-  }
+}
+
+@keyframes fill {
+    0% {
+        height: 0;
+    }
+    100% {
+        height: 50%;
+    }
+}
+
+@keyframes move {
+    0% {
+        bottom: 0;
+    }
+    100% {
+        bottom: 50%;
+    }
+}
+
 td {
     text-align: center;
+    font-size: large;
+}
+table tbody {
+    display: block; /* Allow us to use overflow property */
+    max-height: 70vh; /* Set max-height to 70% of the viewport height */
+    overflow-y: auto; /* Add scroll if content is larger than max-height */
+    width: 280px;
+}
+table thead, table tbody tr {
+    display: table; /* Enable table properties for thead and tbody */
+    width: 250px;
+    table-layout: fixed; /* Fixed columns width */
 }

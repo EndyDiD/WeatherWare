@@ -17,7 +17,7 @@ public class ApiMeteoService {
 
         // Somethign to Consume APIs from the web
         WebClient webClient = WebClient.create();
-        LOGGER.info("Getting Data from apiMeteo");
+        LOGGER.warn("Getting Data from apiMeteo");
         return webClient.get()
                 .uri(url)
                 .retrieve()

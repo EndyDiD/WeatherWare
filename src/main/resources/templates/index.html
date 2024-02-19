@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="resources/ThermoStyle.css">
+    <link rel="stylesheet" type="text/css" href="resources/ThermometerUnitConversion/UnitSwitch.css">
+</head>
+<style>
+    .thermometer {
+        z-index: 1;
+        bottom: 0;
+    }
+
+    .thermometer:before {
+        height: 50%;
+    }
+</style>
+
+<body>
+<h1 style="text-align:center;">Temperature Range</h1>
+<div style="display:flex; justify-content:center; align-items:center;">
+    <label class="CelciustoFarenhiteSwitch">
+        <input type="checkbox" id="convert" onclick="convertTemperature()">
+        <span class="slider round">
+                <span class="TempUnits"> ℉    ℃</span>
+            </span>
+    </label>
+    <div class="container">
+        <table>
+            <thead>
+            <th>Temperature</th>
+            <th>Emoji</th>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${clothingItems}">
+                <td>
+                    <span class="temp" th:text="${item.tempValue}">[tempValue]</span>
+                    <span class="unit">℃</span>
+                </td>
+                <td th:text="${item.clothingItemEmoji}">[clothingItemEmoji]</td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="thermometer">
+            <div id="fill"></div>
+            <div id="temperature"><span class="temp" th:text="${forecasts.forecastTimestamps.getFirst().getFeelsLikeTemperature()}">[currentTemperature]</span>°</div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript" src="resources/ThermometerUnitConversion/UnitConverter.js"></script>
+<script>
+    window.onload = function () {
+        var tableBodyHeight = document.querySelector('table tbody').offsetHeight;
+        var thermometerDiv = document.querySelector('#thermometer');
+        var containerDiv = document.querySelector('.container');
+        thermometerDiv.style.height = tableBodyHeight + 'px';
+        containerDiv.style.height = tableBodyHeight + 'px';
+
+        // Get the tbody container
+        var tbody = document.querySelector('table tbody');
+
+        // Calculate the maximum scroll position (total height - visible height)
+        var maxScrollTop = tbody.scrollHeight - tbody.clientHeight;
+
+        // Set the desired scroll percentage (e.g., 50%)
+        var scrollPercentage = 50;
+
+        // Calculate the pixel value for the desired scroll percentage
+        var scrollTopValue = (maxScrollTop * scrollPercentage) / 100;
+
+        // Set the scroll position
+        tbody.scrollTop = scrollTopValue;
+
+    }
+</script>
+
+</html>
